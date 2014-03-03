@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="PAL_PlayAndLearn.Pages.ProfileContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:DataBase="clr-namespace:PAL_PlayAndLearn.ViewModels"
+             mc:Ignorable="d" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+             Width="Auto" Height="Auto">
+    <UserControl.DataContext>
+        <DataBase:ViewModel/>
+    </UserControl.DataContext>
+    <Grid Grid.Row="2" Margin="80,0,80,0" DataContext="{Binding CurrentUserInformation}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Лични данни" HorizontalAlignment="Left" Margin="0,20,0,10" FontFamily="/Resources/#Kelson Sans Light BG" FontSize="20" FontWeight="Bold" Foreground="#137FB2"/>
+        <Button Grid.Row="0" Grid.Column="1" Background="Transparent" BorderThickness="0" FontSize="19" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Gray" Margin="0,15,0,0" FontFamily="/Resources/#FontAwesome" Style="{StaticResource ButtonNoEffect}" ToolTip="Редактиране на лични данни" Click="OpenProfile">
+            <Button.Content>
+                <TextBlock>
+                    <TextBlock.Inlines>
+                        <Run FontSize="13" Text="Редактирай"/>
+                        <Run FontSize="19" Text="&#xf044;" BaselineAlignment="Subscript"/>
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Button.Content>
+        </Button>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="&#xf041;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2" ToolTip="Град"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding UserCityName, TargetNullValue=Град}" HorizontalAlignment="Left" Margin="10,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19" Foreground="#4E4E4E" ToolTip="Град">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserCityName}" Value="{x:Null}">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Separator Grid.ColumnSpan="2" Grid.Row="2" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="&#xf0f7;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2" ToolTip="Училище"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding UserSchoolName, TargetNullValue=Училище}" HorizontalAlignment="Left" Margin="10,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19" Foreground="#4E4E4E" ToolTip="Училище">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserSchoolName}" Value="{x:Null}">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Separator Grid.ColumnSpan="2" Grid.Row="4" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="&#xf073;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,6,0,8" Foreground="#137FB2" ToolTip="Години"/>
+        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding UserYears, TargetNullValue=Години}" HorizontalAlignment="Left" Margin="10,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19" Foreground="#4E4E4E" ToolTip="Години">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserYears}" Value="{x:Null}">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Separator Grid.ColumnSpan="2" Grid.Row="6" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="&#xf102;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2" ToolTip="Клас"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding UserClass, TargetNullValue=Клас}" HorizontalAlignment="Left" Margin="10,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19" Foreground="#4E4E4E" ToolTip="Клас">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserClass}" Value="{x:Null}">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+        <Separator Grid.ColumnSpan="2" Grid.Row="8" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="&#xf004;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2" ToolTip="Пол"/>
+        <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding UserSex, TargetNullValue=Пол}" HorizontalAlignment="Left" Margin="10,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19" Foreground="#4E4E4E" ToolTip="Пол">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UserSex}" Value="{x:Null}">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+    </Grid>
+</UserControl>

@@ -1,0 +1,146 @@
+﻿<UserControl x:Class="PAL_PlayAndLearn.Pages.TestQuestions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:DataBase="clr-namespace:PAL_PlayAndLearn.ViewModels"
+             xmlns:converter="clr-namespace:PAL_PlayAndLearn.Conerter"
+             mc:Ignorable="d" 
+             MinWidth="800" d:DesignWidth="800" MaxWidth="1100" VerticalAlignment="Stretch" VerticalContentAlignment="Stretch" x:Name="TestQuestionsUserControl">
+    <UserControl.DataContext>
+        <DataBase:ViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <converter:Converter x:Key="CommandMultyParameters"/>
+    </UserControl.Resources>
+    <Grid Width="{Binding ElementName=HomeControl, Path=ActualWidth}" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#009be4" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="35">
+                <TextBlock Text="Въпроси:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19"/>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="35" Margin="0,0,0,10">
+                <Label Name="AllQuestions"  Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" Width="100"/>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="35">
+                <TextBlock Text="Оставащи въпроси:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19"/>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="35" Margin="0,0,0,10">
+                <Label Name="RemainQuestions" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelStyle}" Content="{Binding RemainQuestions, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="30">
+                <TextBlock Text="Време за отговор:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19"/>
+            </Viewbox>
+            <Viewbox Stretch="Uniform" Width="Auto" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="30">
+                <Label Name="Timer" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="25" Content="00:00:45">
+                    <Label.Foreground>
+                        <SolidColorBrush x:Name="GreenToRed" Color="Red"/>
+                    </Label.Foreground>
+                </Label>
+            </Viewbox>
+        </Grid>
+        <Rectangle HorizontalAlignment="Stretch" Height="10" Fill="#00b8e5" Grid.Row="1"/>
+        <Grid Background="{StaticResource StackPanelGradient}" Grid.Row="2" VerticalAlignment="Stretch">
+            <StackPanel
+                Name="QuestionStackPanel"
+                Background="Transparent"
+                ScrollViewer.CanContentScroll="True"
+                DataContext="{Binding TestQuestions}"
+                Visibility="Collapsed">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Name="CorrectAnswerTextBlock" Text="{Binding CorrectAnswer}" Visibility="Collapsed"/>
+                    <TextBlock Name="IDAnswerTextBlock" Text="{Binding ID}" Visibility="Collapsed"/>
+                    <Label Grid.Row="0" Style="{StaticResource TestQuestionLabel}">
+                        <TextBlock Padding="2,0,2,0" Text="{Binding QuestionText}" TextWrapping="WrapWithOverflow"/>
+                    </Label>
+                    <Button Name="AnswerOneButton" Grid.Row="1" Style="{StaticResource ButtonAnswerOneAndTwo}" Command="{Binding ElementName=TestQuestionsUserControl, Path=DataContext.AnswerQuestion}" Click="NextQuestion">
+                        <TextBlock Name="AnswerOneTextBlock" Style="{StaticResource TextBlockUnderlineText}" Padding="2,0,2,0" Text="{Binding AnswerOne}" TextWrapping="WrapWithOverflow"/>
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CommandMultyParameters}">
+                                <Binding ElementName="AnswerOneTextBlock" Path="Text"/>
+                                <Binding ElementName="CorrectAnswerTextBlock" Path="Text"/>
+                                <Binding ElementName="IDAnswerTextBlock" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Name="AnswerTwoButton" Grid.Row="2" Style="{StaticResource ButtonAnswerOneAndTwo}" Command="{Binding ElementName=TestQuestionsUserControl, Path=DataContext.AnswerQuestion}" Click="NextQuestion">
+                        <TextBlock Name="AnswerTwoTextBlock" Style="{StaticResource TextBlockUnderlineText}" Padding="2,0,2,0" Text="{Binding AnswerTwo}" TextWrapping="WrapWithOverflow"/>
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CommandMultyParameters}">
+                                <Binding ElementName="AnswerTwoTextBlock" Path="Text"/>
+                                <Binding ElementName="CorrectAnswerTextBlock" Path="Text"/>
+                                <Binding ElementName="IDAnswerTextBlock" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button x:Name="AnswerThreeButton" Grid.Row="3" Style="{StaticResource ButtonAnswerThree}" Command="{Binding ElementName=TestQuestionsUserControl, Path=DataContext.AnswerQuestion}" Click="NextQuestion">
+                        <TextBlock Name="AnswerThreeTextBlock" Style="{StaticResource TextBlockUnderlineText}" Padding="2,0,2,0" Text="{Binding AnswerThree}" TextWrapping="WrapWithOverflow"/>
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CommandMultyParameters}">
+                                <Binding ElementName="AnswerThreeTextBlock" Path="Text"/>
+                                <Binding ElementName="CorrectAnswerTextBlock" Path="Text"/>
+                                <Binding ElementName="IDAnswerTextBlock" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Name="AnswerFourButton" Grid.Row="4" Style="{StaticResource ButtonAnswerFour}" Command="{Binding ElementName=TestQuestionsUserControl, Path=DataContext.AnswerQuestion}" Click="NextQuestion">
+                        <TextBlock x:Name="AnswerFourTextBlock" Style="{StaticResource TextBlockUnderlineText}" Padding="2,0,2,0" Text="{Binding AnswerFour}" TextWrapping="WrapWithOverflow"/>
+                        <Button.CommandParameter>
+                            <MultiBinding Converter="{StaticResource CommandMultyParameters}">
+                                <Binding ElementName="AnswerFourTextBlock" Path="Text"/>
+                                <Binding ElementName="CorrectAnswerTextBlock" Path="Text"/>
+                                <Binding ElementName="IDAnswerTextBlock" Path="Text"/>
+                            </MultiBinding>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </StackPanel>
+            <StackPanel 
+                Name="InformationStackPanel"
+                Background="Transparent"
+                ScrollViewer.CanContentScroll="True"
+                VerticalAlignment="Center">
+                <Grid VerticalAlignment="Center" DataContext="{Binding CurrentTestInformation}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Предмет:" TextAlignment="Center" FontSize="17" Foreground="White" Margin="0,10,0,0"/>
+                    <TextBlock Name="SubjectNameTextBlock" Text="{Binding CurrentSubjectName}" Grid.Row="1" TextAlignment="Center" FontSize="17" Foreground="White" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <TextBlock Grid.Row="2" Text="Тест:" TextAlignment="Center" FontSize="17" Foreground="White" Margin="0,10,0,0"/>
+                    <TextBlock Name="TestNameTextBlock" Text="{Binding CurrentTestName}" Grid.Row="3" TextAlignment="Center" FontSize="17" Foreground="White" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <TextBlock Grid.Row="4" Text="Максимален брой точки:" TextAlignment="Center" FontSize="17" Foreground="White" Margin="0,10,0,0"/>
+                    <Label Name="maximalPointsTextBlock" Grid.Row="5" HorizontalContentAlignment="Center" FontSize="17" Foreground="White" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <Button Grid.Row="6" Content="Начало на тест" Click="ShowQuestions" Style="{StaticResource ShowQuestionsButton}"/>
+                    <Button Grid.Row="7" Content="Откажи се!" Click="QuitTest" Style="{StaticResource QuitTestButton}"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

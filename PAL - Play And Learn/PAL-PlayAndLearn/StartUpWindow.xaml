@@ -1,0 +1,11 @@
+﻿<Window x:Class="PAL_PlayAndLearn.StartUpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ViewModel="clr-namespace:PAL_PlayAndLearn.ViewModels"
+        xmlns:Pages="clr-namespace:PAL_PlayAndLearn.Pages"
+        Title="PAL - Play And Learn" 
+        MinWidth="820" MinHeight="700" Width="820" Height="700"
+        WindowStartupLocation="CenterScreen" Name="MainWindow"
+        Icon="/Resources/LOGO240.ico" SizeToContent="WidthAndHeight" Background="{StaticResource StackPanelGradient}">
+    <ContentControl x:Name="StartUpProgramContentControl" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch"/>
+</Window>

@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3BBA65DD-9D15-488E-BC51-21B13B961514}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAL_PlayAndLearn</RootNamespace>
+    <AssemblyName>PAL-PlayAndLearn</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Behavior\ButtonDropDownBehavior.cs" />
+    <Compile Include="Behavior\RelayCommand.cs" />
+    <Compile Include="Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converter\Converter.cs" />
+    <Compile Include="LogInRegisterCommands\LogInRegisterCommand.cs" />
+    <Compile Include="MessageBox\IconHelper.cs" />
+    <Compile Include="MessageBox\MessageBox.xaml.cs">
+      <DependentUpon>MessageBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Pages\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainProgram.xaml.cs">
+      <DependentUpon>MainProgram.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProfileContent.xaml.cs">
+      <DependentUpon>ProfileContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProfileContentEdit.xaml.cs">
+      <DependentUpon>ProfileContentEdit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Ranking.xaml.cs">
+      <DependentUpon>Ranking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TestQuestions.xaml.cs">
+      <DependentUpon>TestQuestions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PAL.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAL.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAL.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAL.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAL.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordBinding.cs" />
+    <Compile Include="Persisters\Persister.cs" />
+    <Compile Include="Swithcher.cs" />
+    <Compile Include="Test.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestQuestion.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestsSubjectsName.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGameInformation.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserPersonalInformation.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRegistration.cs">
+      <DependentUpon>PAL.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ValidationRules\EMail.cs" />
+    <Compile Include="ValidationRules\PasswordValidation.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\ViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Page Include="MessageBox\MessageBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Information.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LogInPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainProgram.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Profile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProfileContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProfileContentEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Ranking.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RegisterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TestQuestions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\FontStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourcesGradients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StartUpWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ISwitchable.cs" />
+    <Compile Include="Pages\LogInPage.xaml.cs">
+      <DependentUpon>LogInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StartUpWindow.xaml.cs">
+      <DependentUpon>StartUpWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PAL.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PAL.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PAL.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAL.edmx</DependentUpon>
+      <LastGenOutput>PAL.Context.cs</LastGenOutput>
+    </None>
+    <None Include="PAL.edmx.diagram">
+      <DependentUpon>PAL.edmx</DependentUpon>
+    </None>
+    <None Include="PAL.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAL.edmx</DependentUpon>
+      <LastGenOutput>PAL.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\Kelson Sans Light.otf" />
+    <Resource Include="Resources\Kelson Sans Bold BG.otf" />
+    <Resource Include="Resources\Kelson Sans Light BG.otf" />
+    <Resource Include="Resources\Kelson Sans Regular BG.otf" />
+    <Resource Include="Resources\FontAwesome.otf" />
+    <Resource Include="Resources\RexBoldInline.otf" />
+    <Resource Include="Resources\RexBold.otf" />
+    <Resource Include="Resources\RexLight.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\LOGO240.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\notebookpaper.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

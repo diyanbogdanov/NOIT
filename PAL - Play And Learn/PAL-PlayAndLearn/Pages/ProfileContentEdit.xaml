@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="PAL_PlayAndLearn.Pages.ProfileContentEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:DataBase="clr-namespace:PAL_PlayAndLearn.ViewModels"
+             mc:Ignorable="d" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+             Width="Auto" Height="Auto">
+    <UserControl.DataContext>
+        <DataBase:ViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Grid.Row="2" Margin="80,0,80,0" DataContext="{Binding CurrentUserInformation}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Лични данни" HorizontalAlignment="Center" Margin="0,20,0,10" FontFamily="/Resources/#Kelson Sans Light BG" FontSize="20" FontWeight="Bold" Foreground="#137FB2"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="&#xf041;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2"/>
+        <Grid Grid.Row="1" Grid.Column="1" >
+            <TextBlock Margin="7,0,0,0" VerticalAlignment="Center" Text="{Binding UserCityName}" FontSize="17" Opacity="0.8" Foreground="Gray" Visibility="{Binding ElementName=CityNameTextBox, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox Foreground="Black"  Background="Transparent" Name="CityNameTextBox" Height="30" HorizontalAlignment="Stretch" Margin="5,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19"/>
+        </Grid>
+        <Separator Grid.ColumnSpan="2" Grid.Row="2" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="&#xf0f7;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2"/>
+        <Grid Grid.Row="3" Grid.Column="1" >
+            <TextBlock Margin="7,0,0,0" VerticalAlignment="Center" Text="{Binding UserSchoolName}" FontSize="17" Opacity="0.8" Foreground="Gray" Visibility="{Binding ElementName=SchoolNameTextBox, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox Foreground="Black"  Background="Transparent" Name="SchoolNameTextBox" Height="30" HorizontalAlignment="Stretch" Margin="5,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19"/>
+        </Grid>
+        <Separator Grid.ColumnSpan="2" Grid.Row="4" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="&#xf073;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2"/>
+        <Grid Grid.Row="5" Grid.Column="1" >
+            <TextBlock Margin="7,0,0,0" VerticalAlignment="Center" Text="{Binding UserYears}" FontSize="17" Opacity="0.8" Foreground="Gray" Visibility="{Binding ElementName=YearsOldTextBox, Path=Text.IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <TextBox Foreground="Black"  Background="Transparent" Name="YearsOldTextBox" Height="30" HorizontalAlignment="Stretch" Margin="5,5,0,5" FontFamily="/Resources/#Kelson Sans Light" FontSize="19"/>
+        </Grid>
+        <Separator Grid.ColumnSpan="2" Grid.Row="6" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="&#xf102;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2"/>
+        <Grid Grid.Row="7" Grid.Column="1" >
+            <ComboBox Foreground="Black" Height="30" Name="ClassComboBox" HorizontalAlignment="Stretch" Margin="5,5,0,5" VerticalContentAlignment="Center" FontSize="17" FontFamily="/Resources/#Kelson Sans Light">
+                <ComboBoxItem Content="1 клас"/>
+                <ComboBoxItem Content="2 клас"/>
+                <ComboBoxItem Content="3 клас"/>
+                <ComboBoxItem Content="4 клас"/>
+                <ComboBoxItem Content="5 клас"/>
+                <ComboBoxItem Content="6 клас"/>
+                <ComboBoxItem Content="7 клас"/>
+                <ComboBoxItem Content="8 клас"/>
+                <ComboBoxItem Content="9 клас"/>
+                <ComboBoxItem Content="10 клас"/>
+                <ComboBoxItem Content="11 клас"/>
+                <ComboBoxItem Content="12 клас"/>
+            </ComboBox>
+        </Grid>
+        <Separator Grid.ColumnSpan="2" Grid.Row="8" Margin="5,0,5,0"/>
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="&#xf004;" Style="{StaticResource FontAwesome}" FontSize="19" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15,0,0,0" Foreground="#137FB2"/>
+        <Grid Grid.Row="9" Grid.Column="1" >
+            <ComboBox Foreground="Black" Height="30" Name="SexComboBox" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" Margin="5,5,0,5" FontSize="17" FontFamily="/Resources/#Kelson Sans Light">
+                <ComboBoxItem Content="Мъж"/>
+                <ComboBoxItem Content="Жена"/>
+            </ComboBox>
+        </Grid>
+        <Separator Grid.ColumnSpan="2" Grid.Row="10" Margin="5,0,5,0"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="11" Grid.Column="1">
+            <Button Content="Отмяна" Margin="0,7,5,7" BorderThickness="2" BorderBrush="White" Background="#137FB2" Foreground="White" FontWeight="Bold" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="CancleEditing"/>
+            <Button Content="Запази" Margin="5,7,0,7" BorderThickness="2" BorderBrush="White" Background="#137FB2" Foreground="White" FontWeight="Bold" FontSize="17" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Click="SaveChanges"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

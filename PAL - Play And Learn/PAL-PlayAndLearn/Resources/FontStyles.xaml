@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="RexBold">
+        <Setter Property="TextElement.FontFamily" Value="/Resources/#Rex" />
+    </Style>
+    <Style x:Key="RexInline">
+        <Setter Property="TextElement.FontFamily" Value="/Resources/#Rex Inline"/>
+    </Style>
+    <Style x:Key="FontAwesome">
+        <Setter Property="TextElement.FontFamily" Value="/Resources/#FontAwesome"/>
+    </Style>
+    <Style x:Key="KelsonLightBG">
+        <Setter Property="TextElement.FontFamily" Value="/Resources/#Kelson Sans Light BG"/>
+    </Style>
+    <Style x:Key="KelsonLight">
+        <Setter Property="TextElement.FontFamily" Value="/Resources/#Kelson Sans Light"/>
+    </Style>
+</ResourceDictionary>

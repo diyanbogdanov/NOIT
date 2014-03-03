@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="PAL_PlayAndLearn.Pages.RegisterPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:PAL_PlayAndLearn.ValidationRules"
+             xmlns:viewModel="clr-namespace:PAL_PlayAndLearn.ViewModels"
+             xmlns:converter="clr-namespace:PAL_PlayAndLearn.Conerter"
+             xmlns:passwordBinding="clr-namespace:PAL_PlayAndLearn"
+             mc:Ignorable="d" d:DesignWidth="500"
+             Background="{StaticResource LightBlueDarkBlue}">
+    <UserControl.Resources>
+        <converter:Converter x:Key="ConverterPass"/>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <WrapPanel>
+                            <Border BorderBrush="Red" BorderThickness="3" VerticalAlignment="Center">
+                                <AdornedElementPlaceholder  />
+                            </Border>
+                        </WrapPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <viewModel:RegisterViewModel/>
+    </UserControl.DataContext>
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextAlignment="Center" Text="Регистрация" Style="{StaticResource RexInline}" FontSize="80" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Label Padding="10,20,10,20" HorizontalContentAlignment="Center" Style="{StaticResource RexBold}" FontSize="20" FontWeight="Medium" Target="{x:Reference UserNameRegistration}" MouseLeftButtonUp="FocusOnUserNameRegistration" Grid.Row="1" Grid.Column="0">
+                <Label.Content>
+                    <TextBlock>
+                        <AccessText Text="_Име"/>
+                        <TextBlock Text="*" Foreground="Red" FontWeight="Bold"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <TextBox Text="{Binding Path=UserName}" Name="UserNameRegistration" Height="30" Foreground="Black" FontFamily="/Resources/#Kelson Sans Light" VerticalContentAlignment="Center" FontSize="18" Grid.Row="1" Grid.Column="1"/>
+            <Label Padding="10,20,10,20" Style="{StaticResource RexBold}" FontStyle="Normal" FontWeight="Medium" FontSize="20" HorizontalContentAlignment="Center" Target="{x:Reference UserPasswordRegistration}" MouseLeftButtonUp="FocusOnUserPasswordRegistration" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0">
+                <Label.Content>
+                    <TextBlock>
+                        <AccessText Text="П_арола"/>
+                        <TextBlock Text="*" Foreground="Red" FontWeight="Bold"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <PasswordBox passwordBinding:PasswordBoxAssistant.BindPassword="true" passwordBinding:PasswordBoxAssistant.BoundPassword="{Binding Path=Password, Mode=OneWayToSource, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" Name="UserPasswordRegistration" Height="30" Foreground="Black" Style="{StaticResource RexBold}" FontSize="18" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="Паролата трябва да е минимум 6 символа!" Grid.Column="1" Grid.Row="2" FontStyle="Italic" VerticalAlignment="Bottom"></TextBlock>
+            <Label Padding="10,20,10,20" Style="{StaticResource RexBold}" FontStyle="Normal" FontWeight="Medium" FontSize="20" HorizontalContentAlignment="Center" Target="{x:Reference UserPasswordRegistrationReply}" MouseLeftButtonUp="FocusOnUserPasswordRegistrationReply" Grid.Row="3" Grid.Column="0">
+                <Label.Content>
+                    <TextBlock>
+                        <AccessText Text="П_овтори паролата"/>
+                        <TextBlock Text="*" Foreground="Red" FontWeight="Bold"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <PasswordBox passwordBinding:PasswordBoxAssistant.BindPassword="true" Name="UserPasswordRegistrationReply" Height="30" Foreground="Black" FontFamily="/Resources/#Kelson Sans Light" FontSize="18" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1">
+                <passwordBinding:PasswordBoxAssistant.BoundPassword>
+                    <Binding Path="PasswordReply" Mode="OneWayToSource" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" ValidatesOnExceptions="True"> 
+                        <Binding.ValidationRules>
+                            <local:PasswordValidation/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </passwordBinding:PasswordBoxAssistant.BoundPassword>
+            </PasswordBox>
+            <Label Padding="10,20,10,20" Style="{StaticResource RexBold}" FontWeight="Medium" FontSize="20" HorizontalContentAlignment="Center" Target="{x:Reference UserEMail}" MouseLeftButtonUp="FocusOnUserEMail" Grid.Row="4" Grid.Column="0">
+                <Label.Content>
+                    <TextBlock>
+                        <AccessText Text="_Имейл"/>
+                        <TextBlock Text="*" Foreground="Red" FontWeight="Bold"/>
+                    </TextBlock>
+                </Label.Content>
+            </Label>
+            <TextBox Name="UserEMail" Height="30" Foreground="Black" FontFamily="/Resources/#Kelson Sans Light" FontSize="18" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1">
+                <TextBox.Text>
+                    <Binding Path="EMail" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <local:EMail/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>            
+            <Button Command="{Binding Register}" Content="Регистрация" Foreground="Black" Style="{StaticResource RexBold}" FontWeight="Black" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="18" Width="150" Height="30" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button.CommandParameter>
+                    <MultiBinding Converter="{StaticResource ConverterPass}">
+                        <Binding ElementName="UserPasswordRegistration"/>
+                        <Binding ElementName="UserPasswordRegistrationReply"/>
+                        <Binding ElementName="UserEMail"/>
+                    </MultiBinding>
+                </Button.CommandParameter>
+            </Button>
+            <Button Command="{Binding OpenLogIn}" Style="{StaticResource ButtonNoEffect}" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="15" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" >
+                <Button.Content>
+                    <TextBlock>
+                        <TextBlock.Inlines>
+                            <Run Text="Имаш профил?"/>
+                            <Run Text="Впиши се!" Foreground="White" FontWeight="Bold"/>
+                        </TextBlock.Inlines>
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </StackPanel>
+</UserControl>

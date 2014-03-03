@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbb71b88d5005a4882aca3a2b500cdbd91Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TestQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionText" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="AnswerOne" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AnswerTwo" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="AnswerThree" Type="nvarchar" MaxLength="150" />
+          <Property Name="AnswerFour" Type="nvarchar" MaxLength="150" />
+          <Property Name="CorrectAnswer" Type="int" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="ITTestID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestName" Type="nvarchar" MaxLength="80" Nullable="false" />
+          <Property Name="TestSBJNameID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestsSubjectsNames">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestsSubjectName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserGameInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LevelInGame" Type="nvarchar" MaxLength="3" />
+          <Property Name="Points" Type="nvarchar" MaxLength="20" />
+          <Property Name="NumberOfTests" Type="nvarchar" MaxLength="5" />
+          <Property Name="BestScoreFromTests" Type="nvarchar" MaxLength="5" />
+          <Property Name="ScoreForMount" Type="nvarchar" MaxLength="5" />
+          <Property Name="UserRegID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserPersonalInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YearsOld" Type="nvarchar" MaxLength="3" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="20" />
+          <Property Name="SchoolName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="5" />
+          <Property Name="Class" Type="nvarchar" MaxLength="10" />
+          <Property Name="AvatarPicture" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserRegID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="UserEMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ITTestQuestions_ITTests">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1" />
+          <End Role="TestQuestions" Type="Self.TestQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TestQuestions">
+              <PropertyRef Name="ITTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITTests_TestsSubjectsNames">
+          <End Role="TestsSubjectsNames" Type="Self.TestsSubjectsNames" Multiplicity="1" />
+          <End Role="Tests" Type="Self.Tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsSubjectsNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tests">
+              <PropertyRef Name="TestSBJNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameInformation_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserGameInformation" Type="Self.UserGameInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserGameInformation">
+              <PropertyRef Name="UserRegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPersonalInformation_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserPersonalInformation" Type="Self.UserPersonalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPersonalInformation">
+              <PropertyRef Name="UserRegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbb71b88d5005a4882aca3a2b500cdbd91ModelStoreContainer">
+          <EntitySet Name="TestQuestions" EntityType="Self.TestQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tests" EntityType="Self.Tests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestsSubjectsNames" EntityType="Self.TestsSubjectsNames" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserGameInformation" EntityType="Self.UserGameInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPersonalInformation" EntityType="Self.UserPersonalInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ITTestQuestions_ITTests" Association="Self.FK_ITTestQuestions_ITTests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="TestQuestions" EntitySet="TestQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ITTests_TestsSubjectsNames" Association="Self.FK_ITTests_TestsSubjectsNames">
+            <End Role="TestsSubjectsNames" EntitySet="TestsSubjectsNames" />
+            <End Role="Tests" EntitySet="Tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameInformation_UserRegistration1" Association="Self.FK_UserGameInformation_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="UserGameInformation" EntitySet="UserGameInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPersonalInformation_UserRegistration" Association="Self.FK_UserPersonalInformation_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistration" />
+            <End Role="UserPersonalInformation" EntitySet="UserPersonalInformation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbb71b88d5005a4882aca3a2b500cdbd91Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TestQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionText" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnswerOne" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnswerTwo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnswerThree" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AnswerFour" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectAnswer" Type="Int32" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="ITTestID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_ITTestQuestions_ITTests" FromRole="TestQuestions" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestName" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestSBJNameID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestQuestions" Relationship="Self.FK_ITTestQuestions_ITTests" FromRole="Tests" ToRole="TestQuestions" />
+          <NavigationProperty Name="TestsSubjectsName" Relationship="Self.FK_ITTests_TestsSubjectsNames" FromRole="Tests" ToRole="TestsSubjectsNames" />
+        </EntityType>
+        <EntityType Name="TestsSubjectsName">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestsSubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Tests" Relationship="Self.FK_ITTests_TestsSubjectsNames" FromRole="TestsSubjectsNames" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="UserGameInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LevelInGame" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Points" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfTests" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="BestScoreFromTests" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ScoreForMount" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="UserRegID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_UserGameInformation_UserRegistration1" FromRole="UserGameInformation" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="UserPersonalInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearsOld" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Class" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarPicture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserRegID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserRegistration" Relationship="Self.FK_UserPersonalInformation_UserRegistration" FromRole="UserPersonalInformation" ToRole="UserRegistration" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserPassword" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserEMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserGameInformations" Relationship="Self.FK_UserGameInformation_UserRegistration1" FromRole="UserRegistration" ToRole="UserGameInformation" />
+          <NavigationProperty Name="UserPersonalInformations" Relationship="Self.FK_UserPersonalInformation_UserRegistration" FromRole="UserRegistration" ToRole="UserPersonalInformation" />
+        </EntityType>
+        <Association Name="FK_ITTestQuestions_ITTests">
+          <End Role="Tests" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestQuestions" Type="Self.TestQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TestQuestions">
+              <PropertyRef Name="ITTestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ITTests_TestsSubjectsNames">
+          <End Role="TestsSubjectsNames" Type="Self.TestsSubjectsName" Multiplicity="1" />
+          <End Role="Tests" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestsSubjectsNames">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Tests">
+              <PropertyRef Name="TestSBJNameID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserGameInformation_UserRegistration1">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserGameInformation" Type="Self.UserGameInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserGameInformation">
+              <PropertyRef Name="UserRegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPersonalInformation_UserRegistration">
+          <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+          <End Role="UserPersonalInformation" Type="Self.UserPersonalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRegistration">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserPersonalInformation">
+              <PropertyRef Name="UserRegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PALEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TestQuestions" EntityType="Self.TestQuestion" />
+          <EntitySet Name="Tests" EntityType="Self.Test" />
+          <EntitySet Name="TestsSubjectsNames" EntityType="Self.TestsSubjectsName" />
+          <EntitySet Name="UserGameInformations" EntityType="Self.UserGameInformation" />
+          <EntitySet Name="UserPersonalInformations" EntityType="Self.UserPersonalInformation" />
+          <EntitySet Name="UserRegistrations" EntityType="Self.UserRegistration" />
+          <AssociationSet Name="FK_ITTestQuestions_ITTests" Association="Self.FK_ITTestQuestions_ITTests">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="TestQuestions" EntitySet="TestQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ITTests_TestsSubjectsNames" Association="Self.FK_ITTests_TestsSubjectsNames">
+            <End Role="TestsSubjectsNames" EntitySet="TestsSubjectsNames" />
+            <End Role="Tests" EntitySet="Tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserGameInformation_UserRegistration1" Association="Self.FK_UserGameInformation_UserRegistration1">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="UserGameInformation" EntitySet="UserGameInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPersonalInformation_UserRegistration" Association="Self.FK_UserPersonalInformation_UserRegistration">
+            <End Role="UserRegistration" EntitySet="UserRegistrations" />
+            <End Role="UserPersonalInformation" EntitySet="UserPersonalInformations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbb71b88d5005a4882aca3a2b500cdbd91ModelStoreContainer" CdmEntityContainer="PALEntities">
+          <EntitySetMapping Name="TestQuestions">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.TestQuestion">
+              <MappingFragment StoreEntitySet="TestQuestions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+                <ScalarProperty Name="AnswerOne" ColumnName="AnswerOne" />
+                <ScalarProperty Name="AnswerTwo" ColumnName="AnswerTwo" />
+                <ScalarProperty Name="AnswerThree" ColumnName="AnswerThree" />
+                <ScalarProperty Name="AnswerFour" ColumnName="AnswerFour" />
+                <ScalarProperty Name="CorrectAnswer" ColumnName="CorrectAnswer" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="ITTestID" ColumnName="ITTestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.Test">
+              <MappingFragment StoreEntitySet="Tests">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="TestSBJNameID" ColumnName="TestSBJNameID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestsSubjectsNames">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.TestsSubjectsName">
+              <MappingFragment StoreEntitySet="TestsSubjectsNames">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TestsSubjectName" ColumnName="TestsSubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserGameInformations">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserGameInformation">
+              <MappingFragment StoreEntitySet="UserGameInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LevelInGame" ColumnName="LevelInGame" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="NumberOfTests" ColumnName="NumberOfTests" />
+                <ScalarProperty Name="BestScoreFromTests" ColumnName="BestScoreFromTests" />
+                <ScalarProperty Name="ScoreForMount" ColumnName="ScoreForMount" />
+                <ScalarProperty Name="UserRegID" ColumnName="UserRegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPersonalInformations">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserPersonalInformation">
+              <MappingFragment StoreEntitySet="UserPersonalInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="YearsOld" ColumnName="YearsOld" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="AvatarPicture" ColumnName="AvatarPicture" />
+                <ScalarProperty Name="UserRegID" ColumnName="UserRegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistrations">
+            <EntityTypeMapping TypeName="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserEMail" ColumnName="UserEMail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

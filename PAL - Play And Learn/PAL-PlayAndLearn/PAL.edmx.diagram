@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4ff80da68e8e4e6fbf55f0fce46a1ee2" Name="Diagram1">
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.TestQuestion" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.Test" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.TestsSubjectsName" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserGameInformation" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserPersonalInformation" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbb71b88d5005a4882aca3a2b500cdbd91Model.UserRegistration" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="dbb71b88d5005a4882aca3a2b500cdbd91Model.FK_ITTestQuestions_ITTests" ManuallyRouted="false" />
+        <AssociationConnector Association="dbb71b88d5005a4882aca3a2b500cdbd91Model.FK_ITTests_TestsSubjectsNames" ManuallyRouted="false" />
+        <AssociationConnector Association="dbb71b88d5005a4882aca3a2b500cdbd91Model.FK_UserGameInformation_UserRegistration1" ManuallyRouted="false" />
+        <AssociationConnector Association="dbb71b88d5005a4882aca3a2b500cdbd91Model.FK_UserPersonalInformation_UserRegistration" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

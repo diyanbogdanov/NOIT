@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="PAL_PlayAndLearn.Pages.Menu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:DataBase="clr-namespace:PAL_PlayAndLearn.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="120" d:DesignWidth="800" MinWidth="800" MinHeight="120"
+             Background="{StaticResource MenuGradient}">
+    <UserControl.DataContext>
+        <DataBase:ViewModel/>
+    </UserControl.DataContext>
+    <Grid MaxWidth="1100" x:Name="GridName">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="134"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image MouseLeftButtonDown="OpenHomeImage" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="6" Margin="0,0,700,0" Height="100" HorizontalAlignment="Left"  Source="/Resources/LOGO240.ico">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Effect">
+                                <Setter.Value>
+                                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="White"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Border Margin="5,0,5,0" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" CornerRadius="0,0,10,10" BorderThickness="0.5,0,0.5,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  BorderBrush="#0c6c99">
+            <Border Background="#009be4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-0.5,0,-0.5,0" CornerRadius="0,0,10,10" BorderThickness="0.5,0,0.5,1" BorderBrush="#0083c1">
+                <StackPanel Background="#009be4" MinWidth="600" Height="57" Orientation="Vertical" Margin="10,0,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Margin="30,0,0,0" Text="Тестове:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Name="TestNumbers"  Margin="30,0,0,0" Grid.Column="1" Grid.Row="1" Style="{StaticResource LabelStyle}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Margin="30,0,0,0" Text="Предмети:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Name="SubjectsNumber" Margin="30,0,0,0" Grid.Column="0" Grid.Row="1" Style="{StaticResource LabelStyle}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Margin="30,0,0,0" Text="Въпроси:" Foreground="White" FontFamily="/Resources/#Rex" FontWeight="Bold" FontSize="19" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Label Name="QuestionsNumber" Margin="30,0,0,0" Grid.Column="2" Grid.Row="1" Style="{StaticResource LabelStyle}" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <DockPanel Width="Auto" Grid.Column="3" Grid.RowSpan="2" DataContext="{Binding CurrentUserInformation}">
+                            <Button Style="{StaticResource ComboButton}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,15,0" x:Name="CommboButton" Tag="{Binding UserAvatar}" Content="{Binding UserName}"/>
+                        </DockPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Border>
+        <Button Click="OpenHome" Content="Начало" Style="{StaticResource MenuButttonsStyle}" Grid.Row="2" Grid.Column="1"/>
+        <Button Click="OpenRanking" Content="Класация" Style="{StaticResource MenuButttonsStyle}" Grid.Row="2" Grid.Column="2"/>
+        <Button Click="OpenGame" Content="Играй" Style="{StaticResource MenuButttonsStyle}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="3"/>
+        <Button Click="OpenInformation" Content="Информация" Style="{StaticResource MenuButttonsStyle}" Grid.Row="2" Grid.Column="5"/>
+    </Grid>
+</UserControl>
